@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
@@ -11,37 +12,28 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
+            CarManager carManager = new CarManager(new EfCarDal());
            
             Car car1 = new Car();
-            car1.CarId = 6;
-            car1.BrandId = 3;
+            car1.CarId = 1;
+            car1.BrandId = 1;
             car1.ColorId = 2;
             car1.ModelYear = 2013;
             car1.DailyPrice = 120;
             car1.Description = "Benzin";
-            Car car2 = new Car();
-            car2.CarId = 5;
-            car2.BrandId = 3;
-            car2.ColorId = 2;
-            car2.ModelYear = 2013;
-            car2.DailyPrice = 100;
-            car2.Description = "Benzin";
-            Car car3 = new Car();
-            car3.CarId = 6;
-            car3.BrandId = 4;
-            car3.ColorId = 2;
-            car3.DailyPrice = 90;
-            car3.Description = "Tüplü";
-            car3.ModelYear = 2005;
-
-            carManager.Add(car1);
-            carManager.Delete(car2);
-            carManager.Update(car3);
-            foreach (var car in carManager.GetAll())
+            Brand brand4 = new Brand();
+            brand4.BrandId = 4;
+            brand4.BrandName = "Fiat";
+            Color color4 = new Color();
+            color4.ColorId = 4;
+            color4.ColorName = "Kırmızı";
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+           foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine(car.CarId + " " + car.ColorId + " " + car.BrandId + " " + car.DailyPrice + " " + car.Description + " " + car.ModelYear);
-            }
+                Console.WriteLine("{0} {1} {2} {3}" ,car.CarName, car.BrandName, car.ColorName,car.DailyPrice);
+            } 
+
         }
 
         
