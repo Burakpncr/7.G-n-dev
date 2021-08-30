@@ -13,7 +13,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-           
+            Car car8 = new Car();
             Car car1 = new Car();
             car1.CarId = 1;
             car1.BrandId = 1;
